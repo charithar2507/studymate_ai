@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Note - StudyMate AI</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fstudymate8339back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Top Navigation -->
+    <nav class="bg-surface border-b border-secondary-200 sticky top-0 z-40">
+        <div class="px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo and Back Button -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="history.back()" class="p-2 text-secondary-400 hover:text-primary transition-colors rounded-lg hover:bg-secondary-100">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h1 class="text-xl font-semibold text-text-primary">Create New Note</h1>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center space-x-3">
+                    <button id="previewBtn" class="btn-secondary">
+                        <i class="fas fa-eye mr-2"></i>Preview
+                    </button>
+                    <button id="saveBtn" class="btn-primary">
+                        <i class="fas fa-save mr-2"></i>Save Note
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex min-h-screen">
+        <!-- Main Content -->
+        <main class="flex-1 p-6 max-w-6xl mx-auto">
+            <!-- Note Header -->
+            <div class="card p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="noteTitle" class="block text-sm font-medium text-text-primary mb-2">
+                            Note Title *
+                        </label>
+                        <input type="text" id="noteTitle" placeholder="Enter your note title..." class="input-field" required />
+                    </div>
+                    <div>
+                        <label for="noteTags" class="block text-sm font-medium text-text-primary mb-2">
+                            Tags (Optional)
+                        </label>
+                        <input type="text" id="noteTags" placeholder="data-structures, algorithms, computer-science..." class="input-field" />
+                        <p class="text-xs text-text-secondary mt-1">Separate tags with commas</p>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                    <div>
+                        <label for="noteSubject" class="block text-sm font-medium text-text-primary mb-2">
+                            Subject
+                        </label>
+                        <select id="noteSubject" class="input-field">
+                            <option value>Select Subject</option>
+                            <option value="data-structures">Data Structures</option>
+                            <option value="algorithms">Algorithms</option>
+                            <option value="database">Database Management</option>
+                            <option value="network-security">Network Security</option>
+                            <option value="software-engineering">Software Engineering</option>
+                            <option value="web-development">Web Development</option>
+                            <option value="mobile-development">Mobile Development</option>
+                            <option value="machine-learning">Machine Learning</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="notePriority" class="block text-sm font-medium text-text-primary mb-2">
+                            Priority
+                        </label>
+                        <select id="notePriority" class="input-field">
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-text-primary mb-2">
+                            Word Count
+                        </label>
+                        <div class="input-field bg-secondary-50 text-text-secondary">
+                            <span id="wordCount">0</span> words • <span id="charCount">0</span> characters
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editor Toolbar -->
+            <div class="card p-4 mb-2">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <!-- Text Formatting -->
+                        <div class="flex items-center space-x-1 border-r border-secondary-200 pr-3">
+                            <button id="boldBtn" class="toolbar-btn" title="Bold (Ctrl+B)">
+                                <i class="fas fa-bold"></i>
+                            </button>
+                            <button id="italicBtn" class="toolbar-btn" title="Italic (Ctrl+I)">
+                                <i class="fas fa-italic"></i>
+                            </button>
+                            <button id="underlineBtn" class="toolbar-btn" title="Underline (Ctrl+U)">
+                                <i class="fas fa-underline"></i>
+                            </button>
+                            <button id="strikethroughBtn" class="toolbar-btn" title="Strikethrough">
+                                <i class="fas fa-strikethrough"></i>
+                            </button>
+                        </div>
+
+                        <!-- Headers -->
+                        <div class="flex items-center space-x-1 border-r border-secondary-200 pr-3">
+                            <select id="headerSelect" class="text-sm border border-secondary-200 rounded px-2 py-1">
+                                <option value>Normal</option>
+                                <option value="h1">Heading 1</option>
+                                <option value="h2">Heading 2</option>
+                                <option value="h3">Heading 3</option>
+                                <option value="h4">Heading 4</option>
+                            </select>
+                        </div>
+
+                        <!-- Lists -->
+                        <div class="flex items-center space-x-1 border-r border-secondary-200 pr-3">
+                            <button id="bulletListBtn" class="toolbar-btn" title="Bullet List">
+                                <i class="fas fa-list-ul"></i>
+                            </button>
+                            <button id="numberedListBtn" class="toolbar-btn" title="Numbered List">
+                                <i class="fas fa-list-ol"></i>
+                            </button>
+                        </div>
+
+                        <!-- Insert Tools -->
+                        <div class="flex items-center space-x-1 border-r border-secondary-200 pr-3">
+                            <button id="linkBtn" class="toolbar-btn" title="Insert Link">
+                                <i class="fas fa-link"></i>
+                            </button>
+                            <button id="codeBtn" class="toolbar-btn" title="Code Block">
+                                <i class="fas fa-code"></i>
+                            </button>
+                            <button id="tableBtn" class="toolbar-btn" title="Insert Table">
+                                <i class="fas fa-table"></i>
+                            </button>
+                            <button id="mathBtn" class="toolbar-btn" title="Math Equation">
+                                <i class="fas fa-square-root-alt"></i>
+                            </button>
+                        </div>
+
+                        <!-- Attachments -->
+                        <div class="flex items-center space-x-1">
+                            <button id="imageBtn" class="toolbar-btn" title="Insert Image">
+                                <i class="fas fa-image"></i>
+                            </button>
+                            <button id="attachmentBtn" class="toolbar-btn" title="Attach File">
+                                <i class="fas fa-paperclip"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Editor Mode Toggle -->
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-text-secondary">Auto-save:</span>
+                        <div class="flex items-center">
+                            <div id="autoSaveStatus" class="w-2 h-2 bg-success-500 rounded-full mr-2"></div>
+                            <span class="text-sm text-success-600">On</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editor Area -->
+            <div class="card p-0 mb-6 relative">
+                <div id="noteEditor" class="min-h-96 p-6 focus:outline-none" contenteditable="true" placeholder="Start writing your notes here..." style="min-height: 500px;"></div>
+                
+                <!-- Editor Placeholder -->
+                <div id="editorPlaceholder" class="absolute top-6 left-6 text-text-secondary pointer-events-none">
+                    Start writing your notes here... Press '/' for quick commands
+                </div>
+            </div>
+
+            <!-- Attachments Section -->
+            <div id="attachmentsSection" class="card p-6 mb-6 hidden">
+                <h3 class="text-lg font-semibold text-text-primary mb-4">Attachments</h3>
+                <div id="attachmentsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Attachments will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button id="saveAsDraftBtn" class="btn-secondary">
+                        <i class="fas fa-save mr-2"></i>Save as Draft
+                    </button>
+                    <button id="cancelBtn" class="text-text-secondary hover:text-error-600 transition-colors">
+                        <i class="fas fa-times mr-2"></i>Cancel
+                    </button>
+                </div>
+                
+                <div class="text-sm text-text-secondary">
+                    Last saved: <span id="lastSaved">Never</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-surface rounded-lg w-full max-w-4xl max-h-full overflow-hidden">
+            <div class="flex items-center justify-between p-4 border-b border-secondary-200">
+                <h3 class="text-lg font-semibold text-text-primary">Note Preview</h3>
+                <button id="closePreview" class="text-secondary-400 hover:text-text-primary">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-6 max-h-96 overflow-y-auto">
+                <div id="previewContent">
+                    <!-- Preview content will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="successToast" class="hidden fixed top-4 right-4 bg-success-50 border border-success-200 text-success-600 px-4 py-3 rounded-lg shadow-lg z-50">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="successMessage">Note saved successfully!</span>
+        </div>
+    </div>
+
+    <!-- Hidden file inputs -->
+    <input type="file" id="imageInput" accept="image/*" multiple class="hidden" />
+    <input type="file" id="fileInput" multiple class="hidden" />
+
+    <script>
+        // DOM Elements
+        const noteEditor = document.getElementById('noteEditor');
+        const editorPlaceholder = document.getElementById('editorPlaceholder');
+        const noteTitle = document.getElementById('noteTitle');
+        const wordCount = document.getElementById('wordCount');
+        const charCount = document.getElementById('charCount');
+        const lastSaved = document.getElementById('lastSaved');
+        const autoSaveStatus = document.getElementById('autoSaveStatus');
+        const previewModal = document.getElementById('previewModal');
+        const previewContent = document.getElementById('previewContent');
+        const attachmentsSection = document.getElementById('attachmentsSection');
+        const attachmentsList = document.getElementById('attachmentsList');
+
+        // Auto-save functionality
+        let autoSaveTimer;
+        let isDirty = false;
+
+        function autoSave() {
+            if (isDirty) {
+                // Simulate auto-save
+                const now = new Date();
+                lastSaved.textContent = now.toLocaleTimeString();
+                autoSaveStatus.className = 'w-2 h-2 bg-success-500 rounded-full mr-2';
+                isDirty = false;
+                
+                // Briefly show saving status
+                autoSaveStatus.className = 'w-2 h-2 bg-warning-500 rounded-full mr-2';
+                setTimeout(() => {
+                    autoSaveStatus.className = 'w-2 h-2 bg-success-500 rounded-full mr-2';
+                }, 500);
+            }
+        }
+
+        function markDirty() {
+            isDirty = true;
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(autoSave, 2000); // Auto-save after 2 seconds of inactivity
+        }
+
+        // Editor functionality
+        noteEditor.addEventListener('input', () => {
+            updateWordCount();
+            togglePlaceholder();
+            markDirty();
+        });
+
+        noteEditor.addEventListener('paste', (e) => {
+            // Allow pasting but clean up formatting
+            setTimeout(() => {
+                updateWordCount();
+                markDirty();
+            }, 0);
+        });
+
+        noteTitle.addEventListener('input', markDirty);
+        document.getElementById('noteTags').addEventListener('input', markDirty);
+        document.getElementById('noteSubject').addEventListener('change', markDirty);
+        document.getElementById('notePriority').addEventListener('change', markDirty);
+
+        function togglePlaceholder() {
+            if (noteEditor.textContent.trim() === '') {
+                editorPlaceholder.style.display = 'block';
+            } else {
+                editorPlaceholder.style.display = 'none';
+            }
+        }
+
+        function updateWordCount() {
+            const text = noteEditor.textContent || '';
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+            const chars = text.length;
+            
+            wordCount.textContent = words;
+            charCount.textContent = chars;
+        }
+
+        // Toolbar functionality
+        function execCommand(command, value = null) {
+            document.execCommand(command, false, value);
+            noteEditor.focus();
+            markDirty();
+        }
+
+        // Format buttons
+        document.getElementById('boldBtn').addEventListener('click', () => execCommand('bold'));
+        document.getElementById('italicBtn').addEventListener('click', () => execCommand('italic'));
+        document.getElementById('underlineBtn').addEventListener('click', () => execCommand('underline'));
+        document.getElementById('strikethroughBtn').addEventListener('click', () => execCommand('strikeThrough'));
+
+        // Header selection
+        document.getElementById('headerSelect').addEventListener('change', (e) => {
+            const value = e.target.value;
+            if (value) {
+                execCommand('formatBlock', `<${value}>`);
+            } else {
+                execCommand('formatBlock', '<p>');
+            }
+        });
+
+        // List buttons
+        document.getElementById('bulletListBtn').addEventListener('click', () => execCommand('insertUnorderedList'));
+        document.getElementById('numberedListBtn').addEventListener('click', () => execCommand('insertOrderedList'));
+
+        // Link button
+        document.getElementById('linkBtn').addEventListener('click', () => {
+            const url = prompt('Enter URL:');
+            if (url) {
+                execCommand('createLink', url);
+            }
+        });
+
+        // Code button
+        document.getElementById('codeBtn').addEventListener('click', () => {
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const code = document.createElement('code');
+                code.style.backgroundColor = '#f3f4f6';
+                code.style.padding = '2px 4px';
+                code.style.borderRadius = '4px';
+                code.style.fontFamily = 'monospace';
+                
+                try {
+                    range.surroundContents(code);
+                } catch (e) {
+                    code.textContent = range.toString();
+                    range.deleteContents();
+                    range.insertNode(code);
+                }
+                markDirty();
+            }
+        });
+
+        // Table button
+        document.getElementById('tableBtn').addEventListener('click', () => {
+            const rows = prompt('Number of rows:', '3');
+            const cols = prompt('Number of columns:', '3');
+            
+            if (rows && cols && rows > 0 && cols > 0) {
+                let tableHTML = '<table style="border-collapse: collapse; width: 100%; margin: 16px 0;"><tbody>';
+                for (let r = 0; r < parseInt(rows); r++) {
+                    tableHTML += '<tr>';
+                    for (let c = 0; c < parseInt(cols); c++) {
+                        tableHTML += '<td style="border: 1px solid #e5e7eb; padding: 8px;">Cell</td>';
+                    }
+                    tableHTML += '</tr>';
+                }
+                tableHTML += '</tbody></table>';
+                
+                document.execCommand('insertHTML', false, tableHTML);
+                markDirty();
+            }
+        });
+
+        // Math button
+        document.getElementById('mathBtn').addEventListener('click', () => {
+            const equation = prompt('Enter math equation (LaTeX syntax):');
+            if (equation) {
+                const mathSpan = document.createElement('span');
+                mathSpan.style.backgroundColor = '#fef3c7';
+                mathSpan.style.padding = '2px 6px';
+                mathSpan.style.borderRadius = '4px';
+                mathSpan.style.fontFamily = 'serif';
+                mathSpan.textContent = `$${equation}$`;
+                
+                const selection = window.getSelection();
+                if (selection.rangeCount > 0) {
+                    const range = selection.getRangeAt(0);
+                    range.insertNode(mathSpan);
+                    markDirty();
+                }
+            }
+        });
+
+        // Image button
+        document.getElementById('imageBtn').addEventListener('click', () => {
+            document.getElementById('imageInput').click();
+        });
+
+        document.getElementById('imageInput').addEventListener('change', (e) => {
+            const files = e.target.files;
+            for (let file of files) {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.maxWidth = '100%';
+                        img.style.height = 'auto';
+                        img.style.margin = '16px 0';
+                        img.style.borderRadius = '8px';
+                        
+                        const selection = window.getSelection();
+                        if (selection.rangeCount > 0) {
+                            const range = selection.getRangeAt(0);
+                            range.insertNode(img);
+                            markDirty();
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+
+        // Attachment button
+        document.getElementById('attachmentBtn').addEventListener('click', () => {
+            document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            const files = e.target.files;
+            if (files.length > 0) {
+                attachmentsSection.classList.remove('hidden');
+                
+                for (let file of files) {
+                    addAttachment(file);
+                }
+                markDirty();
+            }
+        });
+
+        function addAttachment(file) {
+            const attachmentDiv = document.createElement('div');
+            attachmentDiv.className = 'flex items-center p-3 border border-secondary-200 rounded-lg hover:bg-secondary-50';
+            
+            const icon = getFileIcon(file.type);
+            const fileSize = (file.size / 1024 / 1024).toFixed(2);
+            
+            attachmentDiv.innerHTML = `
+                <div class="flex items-center flex-1">
+                    <i class="fas ${icon} text-secondary-400 mr-3"></i>
+                    <div>
+                        <p class="text-sm font-medium text-text-primary">${file.name}</p>
+                        <p class="text-xs text-text-secondary">${fileSize} MB</p>
+                    </div>
+                </div>
+                <button class="text-error-600 hover:text-error-700">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            
+            // Add remove functionality
+            attachmentDiv.querySelector('button').addEventListener('click', () => {
+                attachmentDiv.remove();
+                if (attachmentsList.children.length === 0) {
+                    attachmentsSection.classList.add('hidden');
+                }
+            });
+            
+            attachmentsList.appendChild(attachmentDiv);
+        }
+
+        function getFileIcon(mimeType) {
+            if (mimeType.startsWith('image/')) return 'fa-image';
+            if (mimeType.startsWith('video/')) return 'fa-video';
+            if (mimeType.includes('pdf')) return 'fa-file-pdf';
+            if (mimeType.includes('word')) return 'fa-file-word';
+            if (mimeType.includes('excel')) return 'fa-file-excel';
+            if (mimeType.includes('powerpoint')) return 'fa-file-powerpoint';
+            return 'fa-file';
+        }
+
+        // Preview functionality
+        document.getElementById('previewBtn').addEventListener('click', () => {
+            const title = noteTitle.value || 'Untitled Note';
+            const content = noteEditor.innerHTML;
+            
+            previewContent.innerHTML = `
+                <h1 class="text-2xl font-bold text-text-primary mb-4">${title}</h1>
+                <div class="prose prose-gray max-w-none">${content}</div>
+            `;
+            
+            previewModal.classList.remove('hidden');
+        });
+
+        document.getElementById('closePreview').addEventListener('click', () => {
+            previewModal.classList.add('hidden');
+        });
+
+        // Save functionality
+        document.getElementById('saveBtn').addEventListener('click', saveNote);
+        document.getElementById('saveAsDraftBtn').addEventListener('click', () => saveNote(true));
+
+        function saveNote(isDraft = false) {
+            const noteData = {
+                title: noteTitle.value || 'Untitled Note',
+                content: noteEditor.innerHTML,
+                tags: document.getElementById('noteTags').value,
+                subject: document.getElementById('noteSubject').value,
+                priority: document.getElementById('notePriority').value,
+                isDraft: isDraft,
+                createdAt: new Date().toISOString(),
+                wordCount: wordCount.textContent,
+                charCount: charCount.textContent
+            };
+
+            // Simulate save process
+            showToast('Note saved successfully!');
+            
+            // Reset dirty flag
+            isDirty = false;
+            const now = new Date();
+            lastSaved.textContent = now.toLocaleTimeString();
+            
+            // Redirect back to notes after successful save
+            if (!isDraft) {
+                setTimeout(() => {
+                    window.location.href = 'my_notes.html';
+                }, 1500);
+            }
+        }
+
+        // Cancel functionality
+        document.getElementById('cancelBtn').addEventListener('click', () => {
+            if (isDirty) {
+                if (confirm('You have unsaved changes. Are you sure you want to cancel?')) {
+                    window.location.href = 'my_notes.html';
+                }
+            } else {
+                window.location.href = 'my_notes.html';
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch (e.key) {
+                    case 'b':
+                        e.preventDefault();
+                        execCommand('bold');
+                        break;
+                    case 'i':
+                        e.preventDefault();
+                        execCommand('italic');
+                        break;
+                    case 'u':
+                        e.preventDefault();
+                        execCommand('underline');
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        saveNote();
+                        break;
+                }
+            }
+        });
+
+        // Slash commands
+        noteEditor.addEventListener('keydown', (e) => {
+            if (e.key === '/') {
+                // Future: Implement slash commands menu
+                // For now, just allow normal typing
+            }
+        });
+
+        // Initialize
+        togglePlaceholder();
+        updateWordCount();
+
+        // Prevent navigation if there are unsaved changes
+        window.addEventListener('beforeunload', (e) => {
+            if (isDirty) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+
+        // Toast notification function
+        function showToast(message) {
+            const toast = document.getElementById('successToast');
+            const messageElement = document.getElementById('successMessage');
+            messageElement.textContent = message;
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Styles for toolbar buttons
+        const style = document.createElement('style');
+        style.textContent = `
+            .toolbar-btn {
+                padding: 8px 12px;
+                border: 1px solid #e5e7eb;
+                background: #ffffff;
+                color: #374151;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 14px;
+            }
+            
+            .toolbar-btn:hover {
+                background: #f3f4f6;
+                border-color: #d1d5db;
+            }
+            
+            .toolbar-btn.active {
+                background: #3b82f6;
+                color: white;
+                border-color: #3b82f6;
+            }
+            
+            #noteEditor:empty:before {
+                content: attr(placeholder);
+                color: #9ca3af;
+            }
+            
+            .prose {
+                line-height: 1.7;
+            }
+            
+            .prose h1, .prose h2, .prose h3, .prose h4 {
+                margin-top: 1.5em;
+                margin-bottom: 0.5em;
+                font-weight: 600;
+            }
+            
+            .prose h1 { font-size: 1.875rem; }
+            .prose h2 { font-size: 1.5rem; }
+            .prose h3 { font-size: 1.25rem; }
+            .prose h4 { font-size: 1.125rem; }
+            
+            .prose ul, .prose ol {
+                margin: 1em 0;
+                padding-left: 1.5em;
+            }
+            
+            .prose li {
+                margin: 0.25em 0;
+            }
+            
+            .prose table {
+                margin: 1.5em 0;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            
+            .prose td, .prose th {
+                border: 1px solid #e5e7eb;
+                padding: 0.5em 0.75em;
+                text-align: left;
+            }
+            
+            .prose th {
+                background-color: #f9fafb;
+                font-weight: 600;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

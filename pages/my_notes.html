@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Notes - StudyMate AI</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fstudymate8339back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Top Navigation -->
+    <nav class="bg-surface border-b border-secondary-200 sticky top-0 z-40">
+        <div class="px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo and Greeting -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h1 class="text-xl font-semibold text-text-primary">StudyMate AI</h1>
+                    </div>
+                    <div class="hidden md:block h-6 w-px bg-secondary-200"></div>
+                    <div class="hidden md:block">
+                        <p class="text-text-secondary text-sm">Good afternoon, <span class="font-medium text-text-primary">Alex</span></p>
+                    </div>
+                </div>
+
+                <!-- Profile Dropdown -->
+                <div class="relative">
+                    <button id="profileDropdown" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-secondary-100 transition-colors">
+                        <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                            <span class="text-white text-sm font-medium">A</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-secondary-400 text-xs"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-surface rounded-lg shadow-floating border border-secondary-200 py-2">
+                        <div class="px-4 py-2 border-b border-secondary-200">
+                            <p class="text-sm font-medium text-text-primary">Alex Johnson</p>
+                            <p class="text-xs text-text-secondary">student@btech.edu</p>
+                        </div>
+                        <a href="javascript:void(0)" class="block px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50 hover:text-text-primary transition-colors">
+                            <i class="fas fa-user mr-2"></i>Profile Settings
+                        </a>
+                        <a href="login.html" class="block px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50 hover:text-text-primary transition-colors">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex min-h-screen">
+        <!-- Left Sidebar -->
+        <aside class="w-64 bg-surface border-r border-secondary-200 fixed left-0 top-16 h-full overflow-y-auto z-30">
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="dashboard.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-secondary-100 hover:text-text-primary transition-colors">
+                            <i class="fas fa-home w-5"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="my_notes.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-primary-50 text-primary border-r-2 border-primary">
+                            <i class="fas fa-sticky-note w-5"></i>
+                            <span class="font-medium">My Notes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="coding_and_projects.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-secondary-100 hover:text-text-primary transition-colors">
+                            <i class="fas fa-code w-5"></i>
+                            <span>Coding & Projects</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="my_schedule.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-secondary-100 hover:text-text-primary transition-colors">
+                            <i class="fas fa-calendar-alt w-5"></i>
+                            <span>My Schedule</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="focus_mode.html" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-text-secondary hover:bg-secondary-100 hover:text-text-primary transition-colors">
+                            <i class="fas fa-brain w-5"></i>
+                            <span>Focus Mode</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 ml-64 p-6">
+            <!-- Page Header -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-text-primary mb-2">My Notes</h1>
+                        <p class="text-text-secondary">Organize and manage your academic notes with AI assistance</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-accent-50 px-3 py-1 rounded-full">
+                            <span class="text-accent-600 text-sm font-medium">24 Notes</span>
+                        </div>
+                        <button id="newNoteBtn" class="btn-primary">
+                            <i class="fas fa-plus mr-2"></i>New Note
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search and Filter Controls -->
+            <div class="card p-4 mb-6">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-secondary-400"></i>
+                            </div>
+                            <input type="text" id="searchNotes" placeholder="Search notes by title, content, or tags..." class="input-field pl-10" />
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <select id="filterType" class="input-field">
+                            <option value>All Types</option>
+                            <option value="pdf">PDF</option>
+                            <option value="doc">Documents</option>
+                            <option value="image">Images</option>
+                            <option value="video">Videos</option>
+                        </select>
+                        <select id="sortBy" class="input-field">
+                            <option value="recent">Most Recent</option>
+                            <option value="name">Name A-Z</option>
+                            <option value="size">File Size</option>
+                        </select>
+                        <button id="resetFilters" class="btn-secondary">
+                            <i class="fas fa-undo"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Zone -->
+            <div class="card p-6 mb-6">
+                <div id="uploadZone" class="border-2 border-dashed border-secondary-300 rounded-lg p-8 text-center hover:border-primary-400 hover:bg-primary-50 transition-all cursor-pointer">
+                    <div class="mb-4">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-secondary-400 mb-3"></i>
+                        <h3 class="text-lg font-semibold text-text-primary mb-2">Upload Your Notes</h3>
+                        <p class="text-text-secondary mb-4">Drag and drop files here or click to browse</p>
+                        <div class="flex justify-center space-x-4 text-sm text-text-secondary">
+                            <span><i class="fas fa-file-pdf text-error-600"></i> PDF</span>
+                            <span><i class="fas fa-file-word text-primary-600"></i> DOC</span>
+                            <span><i class="fas fa-file-image text-accent-600"></i> Images</span>
+                            <span><i class="fas fa-file-video text-warning-600"></i> Videos</span>
+                        </div>
+                    </div>
+                    <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.mp4,.mov" class="hidden" />
+                    <button class="btn-primary">
+                        <i class="fas fa-plus mr-2"></i>Choose Files
+                    </button>
+                </div>
+
+                <!-- Upload Progress -->
+                <div id="uploadProgress" class="hidden mt-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-text-primary">Uploading files...</span>
+                        <span id="progressPercent" class="text-sm text-text-secondary">0%</span>
+                    </div>
+                    <div class="progress-bar h-2">
+                        <div id="progressFill" class="progress-fill w-0"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Processing Center -->
+            <div class="card p-6 mb-6">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 bg-gradient-to-r from-accent to-primary rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-robot text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-text-primary">AI Processing Center</h3>
+                        <p class="text-text-secondary text-sm">Generate AI summaries for your videos and PDFs</p>
+                    </div>
+                </div>
+                
+                <div class="border border-secondary-200 rounded-lg p-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Video AI Processing -->
+                        <div class="border-r md:border-r border-secondary-200 pr-4">
+                            <h4 class="font-medium text-text-primary mb-3 flex items-center">
+                                <i class="fas fa-video text-warning-600 mr-2"></i>Video Summarizer
+                            </h4>
+                            <div class="flex flex-col space-y-3 mb-3">
+                                <input type="url" id="videoUrlInput" placeholder="Paste video URL (YouTube, Vimeo, etc.)" class="input-field text-sm" />
+                                <div id="videoUrlDisplay" class="text-sm text-text-secondary hidden"></div>
+                            </div>
+                            <button id="processVideoUrl" class="btn-primary w-full text-sm hidden">
+                                <i class="fas fa-magic mr-2"></i>Generate Video Summary
+                            </button>
+                        </div>
+
+                        <!-- PDF AI Processing -->
+                        <div class="pl-4">
+                            <h4 class="font-medium text-text-primary mb-3 flex items-center">
+                                <i class="fas fa-file-pdf text-error-600 mr-2"></i>PDF Summarizer
+                            </h4>
+                            <div class="flex items-center space-x-4 mb-3">
+                                <input type="file" id="pdfInput" accept=".pdf" class="hidden" />
+                                <button id="pdfUploadBtn" class="btn-secondary text-sm">
+                                    <i class="fas fa-upload mr-2"></i>Select PDF
+                                </button>
+                                <div id="pdfFileName" class="text-sm text-text-secondary hidden"></div>
+                            </div>
+                            <button id="processPDF" class="btn-primary w-full text-sm hidden">
+                                <i class="fas fa-magic mr-2"></i>Generate PDF Summary
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Processing Status -->
+                    <div id="aiProcessingStatus" class="hidden mt-4 p-4 bg-gradient-to-r from-accent-50 to-primary-50 rounded-lg border border-accent-200">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center">
+                                <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-accent mr-3"></div>
+                                <span class="text-accent-700 font-medium">AI Processing...</span>
+                            </div>
+                            <span id="processingTimer" class="text-sm text-accent-600">0:00</span>
+                        </div>
+                        <div class="progress-bar h-2 mb-2">
+                            <div id="aiProgressFill" class="progress-fill bg-gradient-to-r from-accent to-primary w-0"></div>
+                        </div>
+                        <p id="processingStep" class="text-sm text-accent-600">Initializing AI analysis...</p>
+                    </div>
+
+                    <!-- AI Summary Display -->
+                    <div id="aiSummaryDisplay" class="hidden mt-4 p-4 bg-success-50 rounded-lg border border-success-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <h5 class="font-semibold text-success-700 flex items-center">
+                                <i class="fas fa-check-circle mr-2"></i>AI Summary Generated
+                            </h5>
+                            <div class="flex space-x-2">
+                                <button id="copySummary" class="text-success-600 hover:text-success-700 text-sm">
+                                    <i class="fas fa-copy mr-1"></i>Copy
+                                </button>
+                                <button id="saveSummary" class="text-success-600 hover:text-success-700 text-sm">
+                                    <i class="fas fa-save mr-1"></i>Save
+                                </button>
+                            </div>
+                        </div>
+                        <div id="summaryContent" class="bg-white p-3 rounded border text-sm text-text-primary max-h-48 overflow-y-auto">
+                            <!-- AI-generated summary will appear here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saved Notes Section -->
+            <div class="card p-6 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-text-primary">My Saved Notes</h3>
+                    <div class="flex items-center space-x-2">
+                        <button id="gridView" class="p-2 text-secondary-400 hover:text-primary transition-colors">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button id="listView" class="p-2 text-primary">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Notes List -->
+                <div id="savedNotesList" class="space-y-3">
+                    <div class="flex items-center justify-between p-4 border border-secondary-200 rounded-lg hover:bg-secondary-50 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-sticky-note text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-text-primary">Data Structures Notes</h4>
+                                <p class="text-sm text-text-secondary">Created Dec 10, 2024 • 2,340 words</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="btn-secondary text-xs">
+                                <i class="fas fa-eye mr-1"></i>View
+                            </button>
+                            <button class="btn-secondary text-xs">
+                                <i class="fas fa-edit mr-1"></i>Edit
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 border border-secondary-200 rounded-lg hover:bg-secondary-50 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-accent-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-sticky-note text-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-text-primary">Algorithm Analysis Summary</h4>
+                                <p class="text-sm text-text-secondary">Created Dec 8, 2024 • 1,850 words</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="btn-secondary text-xs">
+                                <i class="fas fa-eye mr-1"></i>View
+                            </button>
+                            <button class="btn-secondary text-xs">
+                                <i class="fas fa-edit mr-1"></i>Edit
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 border border-secondary-200 rounded-lg hover:bg-secondary-50 transition-colors">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-success-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-sticky-note text-success-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-text-primary">Database Management Study Guide</h4>
+                                <p class="text-sm text-text-secondary">Created Dec 5, 2024 • 3,120 words</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="btn-secondary text-xs">
+                                <i class="fas fa-eye mr-1"></i>View
+                            </button>
+                            <button class="btn-secondary text-xs">
+                                <i class="fas fa-edit mr-1"></i>Edit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- External Tools Integration -->
+            <div class="card p-6 mb-6">
+                <h3 class="text-lg font-semibold text-text-primary mb-4">Quick Access to External Tools</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <a href="https://docs.google.com" target="_blank" class="flex flex-col items-center p-4 border border-secondary-200 rounded-lg hover:bg-secondary-50 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2939&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Google Docs" class="w-8 h-8 rounded mb-2" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        <span class="text-sm font-medium text-text-primary">Google Docs</span>
+                    </a>
+                    <a href="https://notion.so" target="_blank" class="flex flex-col items-center p-4 border border-secondary-200 rounded-lg hover:bg-secondary-50 transition-colors">
+                        <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Notion" class="w-8 h-8 rounded mb-2" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        <span class="text-sm font-medium text-text-primary">Notion</span>
+                    </a>
+                    <a href="https://obsidian.md" target="_blank" class="flex flex-col items-center p-4 border border-secondary-200 rounded-lg hover:bg-secondary-50 transition-colors">
+                        <img src="https://images.pixabay.com/photo/2020/05/18/16/17/social-media-5187243_1280.png?q=80&w=2940&auto=format&fit=crop" alt="Obsidian" class="w-8 h-8 rounded mb-2" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        <span class="text-sm font-medium text-text-primary">Obsidian</span>
+                    </a>
+                    <a href="https://evernote.com" target="_blank" class="flex flex-col items-center p-4 border border-secondary-200 rounded-lg hover:bg-secondary-50 transition-colors">
+                        <img src="https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Evernote" class="w-8 h-8 rounded mb-2" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        <span class="text-sm font-medium text-text-primary">Evernote</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Notes Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="notesGrid">
+                <!-- Note Card 1 -->
+                <div class="card p-4 hover:shadow-elevated transition-all">
+                    <div class="aspect-w-16 aspect-h-9 mb-3">
+                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=2946&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Data Structures Notes" class="w-full h-32 object-cover rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    </div>
+                    <div class="mb-3">
+                        <h4 class="font-semibold text-text-primary mb-1">Data Structures - Trees</h4>
+                        <p class="text-sm text-text-secondary mb-2">Binary trees, AVL trees, and B-trees concepts</p>
+                        <div class="flex items-center justify-between text-xs text-text-secondary">
+                            <span><i class="fas fa-file-pdf text-error-600 mr-1"></i>PDF • 2.4 MB</span>
+                            <span>Dec 10, 2024</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex space-x-2">
+                            <button class="p-1 text-secondary-400 hover:text-primary transition-colors" title="View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="p-1 text-secondary-400 hover:text-accent transition-colors" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="p-1 text-secondary-400 hover:text-error-600 transition-colors" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <button class="btn-secondary text-xs py-1 px-2 ai-process-btn" data-file-type="pdf" data-file-name="Data Structures - Trees">
+                            <i class="fas fa-robot mr-1"></i>AI Process
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Note Card 2 -->
+                <div class="card p-4 hover:shadow-elevated transition-all">
+                    <div class="aspect-w-16 aspect-h-9 mb-3">
+                        <img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Algorithm Notes" class="w-full h-32 object-cover rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    </div>
+                    <div class="mb-3">
+                        <h4 class="font-semibold text-text-primary mb-1">Algorithm Analysis</h4>
+                        <p class="text-sm text-text-secondary mb-2">Time complexity and space optimization</p>
+                        <div class="flex items-center justify-between text-xs text-text-secondary">
+                            <span><i class="fas fa-file-word text-primary-600 mr-1"></i>DOCX • 1.8 MB</span>
+                            <span>Dec 8, 2024</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex space-x-2">
+                            <button class="p-1 text-secondary-400 hover:text-primary transition-colors" title="View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="p-1 text-secondary-400 hover:text-accent transition-colors" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="p-1 text-secondary-400 hover:text-error-600 transition-colors" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <button class="btn-secondary text-xs py-1 px-2 ai-process-btn" data-file-type="doc" data-file-name="Algorithm Analysis">
+                            <i class="fas fa-robot mr-1"></i>AI Process
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Note Card 3 -->
+                <div class="card p-4 hover:shadow-elevated transition-all">
+                    <div class="aspect-w-16 aspect-h-9 mb-3">
+                        <img src="https://images.pixabay.com/photo/2018/05/18/15/30/web-design-3411373_1280.jpg" alt="Database Notes" class="w-full h-32 object-cover rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    </div>
+                    <div class="mb-3">
+                        <h4 class="font-semibold text-text-primary mb-1">Database Management</h4>
+                        <p class="text-sm text-text-secondary mb-2">SQL queries and normalization techniques</p>
+                        <div class="flex items-center justify-between text-xs text-text-secondary">
+                            <span><i class="fas fa-file-pdf text-error-600 mr-1"></i>PDF • 3.2 MB</span>
+                            <span>Dec 5, 2024</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex space-x-2">
+                            <button class="p-1 text-secondary-400 hover:text-primary transition-colors" title="View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="p-1 text-secondary-400 hover:text-accent transition-colors" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="p-1 text-secondary-400 hover:text-error-600 transition-colors" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <button class="btn-secondary text-xs py-1 px-2 ai-process-btn" data-file-type="pdf" data-file-name="Database Management">
+                            <i class="fas fa-robot mr-1"></i>AI Process
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Note Card 4 -->
+                <div class="card p-4 hover:shadow-elevated transition-all">
+                    <div class="aspect-w-16 aspect-h-9 mb-3">
+                        <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Network Security" class="w-full h-32 object-cover rounded-lg" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    </div>
+                    <div class="mb-3">
+                        <h4 class="font-semibold text-text-primary mb-1">Network Security</h4>
+                        <p class="text-sm text-text-secondary mb-2">Cryptography and security protocols</p>
+                        <div class="flex items-center justify-between text-xs text-text-secondary">
+                            <span><i class="fas fa-file-video text-warning-600 mr-1"></i>MP4 • 45.6 MB</span>
+                            <span>Dec 3, 2024</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex space-x-2">
+                            <button class="p-1 text-secondary-400 hover:text-primary transition-colors" title="View">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="p-1 text-secondary-400 hover:text-accent transition-colors" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="p-1 text-secondary-400 hover:text-error-600 transition-colors" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <button class="btn-secondary text-xs py-1 px-2 ai-process-btn" data-file-type="video" data-file-name="Network Security">
+                            <i class="fas fa-robot mr-1"></i>AI Process
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-8">
+                <button class="btn-secondary">
+                    <i class="fas fa-plus mr-2"></i>Load More Notes
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div class="floating-action" id="aiChatbot">
+        <i class="fas fa-robot text-xl"></i>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="successToast" class="hidden fixed top-4 right-4 bg-success-50 border border-success-200 text-success-600 px-4 py-3 rounded-lg shadow-lg z-50">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="successMessage">File uploaded successfully!</span>
+        </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div id="errorToast" class="hidden fixed top-4 right-4 bg-error-50 border border-error-200 text-error-600 px-4 py-3 rounded-lg shadow-lg z-50">
+        <div class="flex items-center">
+            <i class="fas fa-exclamation-circle mr-2"></i>
+            <span id="errorMessage">Upload failed. Please try again.</span>
+        </div>
+    </div>
+
+    <script>
+        // Profile dropdown functionality
+        document.getElementById('profileDropdown').addEventListener('click', function() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const button = document.getElementById('profileDropdown');
+            if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // New Note button functionality
+        document.getElementById('newNoteBtn').addEventListener('click', function() {
+            window.location.href = 'note_creation.html';
+        });
+
+        // File upload functionality
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const progressFill = document.getElementById('progressFill');
+        const progressPercent = document.getElementById('progressPercent');
+
+        // Click to upload
+        uploadZone.addEventListener('click', () => fileInput.click());
+
+        // Drag and drop functionality
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('border-primary-400', 'bg-primary-50');
+        });
+
+        uploadZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('border-primary-400', 'bg-primary-50');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('border-primary-400', 'bg-primary-50');
+            const files = e.dataTransfer.files;
+            handleFileUpload(files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFileUpload(e.target.files);
+        });
+
+        function handleFileUpload(files) {
+            if (files.length === 0) return;
+
+            uploadProgress.classList.remove('hidden');
+            let progress = 0;
+            
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        uploadProgress.classList.add('hidden');
+                        showToast('successToast', `${files.length} file(s) uploaded successfully!`);
+                        // Reset progress
+                        progressFill.style.width = '0%';
+                        progressPercent.textContent = '0%';
+                    }, 500);
+                }
+                progressFill.style.width = progress + '%';
+                progressPercent.textContent = Math.round(progress) + '%';
+            }, 200);
+        }
+
+        // AI Processing functionality
+        const videoUrlInput = document.getElementById('videoUrlInput');
+        const videoUrlDisplay = document.getElementById('videoUrlDisplay');
+        const processVideoUrl = document.getElementById('processVideoUrl');
+        
+        const pdfInput = document.getElementById('pdfInput');
+        const pdfUploadBtn = document.getElementById('pdfUploadBtn');
+        const pdfFileName = document.getElementById('pdfFileName');
+        const processPDF = document.getElementById('processPDF');
+        
+        const aiProcessingStatus = document.getElementById('aiProcessingStatus');
+        const aiProgressFill = document.getElementById('aiProgressFill');
+        const processingTimer = document.getElementById('processingTimer');
+        const processingStep = document.getElementById('processingStep');
+        const aiSummaryDisplay = document.getElementById('aiSummaryDisplay');
+        const summaryContent = document.getElementById('summaryContent');
+        const copySummary = document.getElementById('copySummary');
+        const saveSummary = document.getElementById('saveSummary');
+
+        // Video URL input handling
+        videoUrlInput.addEventListener('input', (e) => {
+            const url = e.target.value.trim();
+            if (url && isValidVideoUrl(url)) {
+                videoUrlDisplay.textContent = `✓ Valid video URL: ${getVideoTitle(url)}`;
+                videoUrlDisplay.classList.remove('hidden');
+                processVideoUrl.classList.remove('hidden');
+            } else if (url) {
+                videoUrlDisplay.textContent = '✗ Invalid video URL';
+                videoUrlDisplay.classList.remove('hidden');
+                processVideoUrl.classList.add('hidden');
+            } else {
+                videoUrlDisplay.classList.add('hidden');
+                processVideoUrl.classList.add('hidden');
+            }
+        });
+
+        function isValidVideoUrl(url) {
+            const videoUrlPatterns = [
+                /^https?:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)/,
+                /^https?:\/\/(www\.)?vimeo\.com\/\d+/,
+                /^https?:\/\/.+\.(mp4|mov|avi|mkv|webm)$/i
+            ];
+            return videoUrlPatterns.some(pattern => pattern.test(url));
+        }
+
+        function getVideoTitle(url) {
+            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                return 'YouTube Video';
+            } else if (url.includes('vimeo.com')) {
+                return 'Vimeo Video';
+            } else {
+                return 'Video File';
+            }
+        }
+
+        // PDF upload handling
+        pdfUploadBtn.addEventListener('click', () => pdfInput.click());
+        pdfInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                pdfFileName.textContent = file.name;
+                pdfFileName.classList.remove('hidden');
+                processPDF.classList.remove('hidden');
+            }
+        });
+
+        // AI Processing simulation
+        function processWithAI(fileType, fileName) {
+            aiProcessingStatus.classList.remove('hidden');
+            aiSummaryDisplay.classList.add('hidden');
+            
+            let progress = 0;
+            let time = 0;
+            const steps = [
+                'Initializing AI analysis...',
+                'Extracting content from file...',
+                'Analyzing text with natural language processing...',
+                'Generating key insights and themes...',
+                'Creating comprehensive summary...',
+                'Finalizing AI-generated summary...'
+            ];
+            let currentStep = 0;
+            
+            const processingInterval = setInterval(() => {
+                time += 1;
+                const minutes = Math.floor(time / 60);
+                const seconds = time % 60;
+                processingTimer.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                progress += Math.random() * 5 + 1;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(processingInterval);
+                    
+                    // Show completed summary
+                    setTimeout(() => {
+                        aiProcessingStatus.classList.add('hidden');
+                        showAISummary(fileType, fileName);
+                    }, 1000);
+                } else if (progress > (currentStep + 1) * 16 && currentStep < steps.length - 1) {
+                    currentStep++;
+                    processingStep.textContent = steps[currentStep];
+                }
+                
+                aiProgressFill.style.width = progress + '%';
+            }, 500);
+        }
+
+        function showAISummary(fileType, fileName) {
+            const mockSummaries = {
+                video: `📹 Video Summary for "${fileName}":
+
+Key Topics Covered:
+• Network security fundamentals and protocols
+• Cryptographic algorithms and their applications  
+• Security vulnerabilities and attack vectors
+• Best practices for system hardening
+
+Main Insights:
+The video provides a comprehensive overview of network security concepts, explaining how encryption protects data transmission and the importance of implementing layered security measures. Key focus areas include understanding common attack patterns and developing effective defense strategies.
+
+Learning Outcomes:
+Students will understand the theoretical foundations of network security and gain practical knowledge for implementing security measures in real-world scenarios.`,
+                
+                pdf: `📄 PDF Summary for "${fileName}":
+
+Document Overview:
+This document covers essential concepts in database management systems, focusing on SQL query optimization and normalization techniques.
+
+Key Sections:
+• Database design principles and normalization forms
+• SQL query performance optimization strategies
+• Index management and database tuning
+• Transaction management and ACID properties
+
+Critical Points:
+The document emphasizes the importance of proper database design for achieving optimal performance and data integrity. Special attention is given to understanding when and how to apply different normalization forms.
+
+Study Focus:
+Students should concentrate on understanding the practical applications of normalization and practice writing efficient SQL queries.`
+            };
+
+            const summary = mockSummaries[fileType] || mockSummaries.pdf;
+            summaryContent.innerHTML = summary.replace(/\n/g, '<br>');
+            aiSummaryDisplay.classList.remove('hidden');
+        }
+
+        // Process buttons
+        processVideoUrl.addEventListener('click', () => {
+            const url = videoUrlInput.value;
+            const fileName = getVideoTitle(url);
+            processWithAI('video', fileName);
+        });
+
+        processPDF.addEventListener('click', () => {
+            const fileName = pdfFileName.textContent;
+            processWithAI('pdf', fileName);
+        });
+
+        // Summary actions
+        copySummary.addEventListener('click', () => {
+            const text = summaryContent.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('successToast', 'Summary copied to clipboard!');
+            });
+        });
+
+        saveSummary.addEventListener('click', () => {
+            showToast('successToast', 'Summary saved to your notes!');
+        });
+
+        // AI Process buttons on note cards
+        document.addEventListener('click', function(event) {
+            if (event.target.closest('.ai-process-btn')) {
+                const btn = event.target.closest('.ai-process-btn');
+                const fileType = btn.dataset.fileType;
+                const fileName = btn.dataset.fileName;
+                
+                processWithAI(fileType, fileName);
+            }
+        });
+
+        // Search and filter functionality
+        const searchInput = document.getElementById('searchNotes');
+        const filterType = document.getElementById('filterType');
+        const sortBy = document.getElementById('sortBy');
+        const resetFilters = document.getElementById('resetFilters');
+
+        searchInput.addEventListener('input', filterNotes);
+        filterType.addEventListener('change', filterNotes);
+        sortBy.addEventListener('change', filterNotes);
+
+        resetFilters.addEventListener('click', () => {
+            searchInput.value = '';
+            filterType.value = '';
+            sortBy.value = 'recent';
+            filterNotes();
+        });
+
+        function filterNotes() {
+            // Simulate filtering functionality
+            console.log('Filtering notes...');
+        }
+
+        // Saved notes view toggle
+        const gridView = document.getElementById('gridView');
+        const listView = document.getElementById('listView');
+        const savedNotesList = document.getElementById('savedNotesList');
+
+        gridView.addEventListener('click', () => {
+            gridView.classList.add('text-primary');
+            gridView.classList.remove('text-secondary-400');
+            listView.classList.add('text-secondary-400');
+            listView.classList.remove('text-primary');
+            // Switch to grid view (not implemented in this example)
+        });
+
+        listView.addEventListener('click', () => {
+            listView.classList.add('text-primary');
+            listView.classList.remove('text-secondary-400');
+            gridView.classList.add('text-secondary-400');
+            gridView.classList.remove('text-primary');
+            // Already in list view
+        });
+
+        // Toast notification function
+        function showToast(toastId, message) {
+            const toast = document.getElementById(toastId);
+            const messageElement = toast.querySelector('#successMessage') || toast.querySelector('#errorMessage');
+            messageElement.textContent = message;
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        // AI Chatbot functionality
+        document.getElementById('aiChatbot').addEventListener('click', () => {
+            showToast('successToast', 'AI Assistant is ready to help!');
+        });
+
+        // Mobile responsiveness
+        function handleMobileView() {
+            const sidebar = document.querySelector('aside');
+            const main = document.querySelector('main');
+            
+            if (window.innerWidth < 768) {
+                sidebar.classList.add('hidden');
+                main.classList.remove('ml-64');
+            } else {
+                sidebar.classList.remove('hidden');
+                main.classList.add('ml-64');
+            }
+        }
+
+        window.addEventListener('resize', handleMobileView);
+        handleMobileView();
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

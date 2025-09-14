@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - StudyMate AI</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fstudymate8339back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=" 60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%232563EB" fill-opacity="0.1"><circle cx="30" cy="30" r="2"></circle></g>'); background-size: 60px 60px;"></g></div>
+    </div>
+
+    <!-- Top Navigation -->
+    <nav class="relative bg-surface shadow-card border-b border-secondary-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-text-primary">StudyMate AI</h1>
+                            <p class="text-xs text-text-secondary">Your BTech Assistant</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personalized Greeting -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <div class="text-right">
+                        <p class="text-sm text-text-secondary">Good morning,</p>
+                        <p class="text-lg font-semibold text-text-primary" id="userGreeting">Alex Johnson</p>
+                    </div>
+                </div>
+
+                <!-- Profile Dropdown -->
+                <div class="relative">
+                    <button id="profileDropdown" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-secondary-100 transition-colors">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                            <span class="text-white text-sm font-medium" id="userInitials">AJ</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-secondary-400 text-xs"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-surface rounded-lg shadow-floating border border-secondary-200 z-50">
+                        <div class="p-3 border-b border-secondary-200">
+                            <p class="font-medium text-text-primary" id="dropdownName">Alex Johnson</p>
+                            <p class="text-sm text-text-secondary" id="dropdownEmail">student@btech.edu</p>
+                        </div>
+                        <div class="py-2">
+                            <a href="javascript:void(0)" class="flex items-center px-3 py-2 text-sm text-text-secondary hover:bg-secondary-100 transition-colors">
+                                <i class="fas fa-user mr-3"></i>
+                                Profile Settings
+                            </a>
+                            <a href="javascript:void(0)" class="flex items-center px-3 py-2 text-sm text-text-secondary hover:bg-secondary-100 transition-colors">
+                                <i class="fas fa-cog mr-3"></i>
+                                Preferences
+                            </a>
+                            <hr class="my-2 border-secondary-200" />
+                            <a href="login.html" class="flex items-center px-3 py-2 text-sm text-error-600 hover:bg-error-50 transition-colors">
+                                <i class="fas fa-sign-out-alt mr-3"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <div class="flex">
+        <!-- Left Sidebar -->
+        <aside class="w-64 bg-surface shadow-card border-r border-secondary-200 min-h-screen">
+            <div class="p-4">
+                <nav class="space-y-2">
+                    <a href="dashboard.html" class="flex items-center space-x-3 px-3 py-2 bg-primary-50 text-primary-600 rounded-lg font-medium">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="my_notes.html" class="flex items-center space-x-3 px-3 py-2 text-text-secondary hover:bg-secondary-100 rounded-lg transition-colors">
+                        <i class="fas fa-sticky-note"></i>
+                        <span>My Notes</span>
+                    </a>
+                    <a href="coding_and_projects.html" class="flex items-center space-x-3 px-3 py-2 text-text-secondary hover:bg-secondary-100 rounded-lg transition-colors">
+                        <i class="fas fa-code"></i>
+                        <span>Coding & Projects</span>
+                    </a>
+                    <a href="my_schedule.html" class="flex items-center space-x-3 px-3 py-2 text-text-secondary hover:bg-secondary-100 rounded-lg transition-colors">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>My Schedule</span>
+                    </a>
+                    <a href="focus_mode.html" class="flex items-center space-x-3 px-3 py-2 text-text-secondary hover:bg-secondary-100 rounded-lg transition-colors">
+                        <i class="fas fa-brain"></i>
+                        <span>Focus Mode</span>
+                    </a>
+                </nav>
+
+                <!-- Progress Summary -->
+                <div class="mt-8 p-4 bg-accent-50 rounded-lg border border-accent-100">
+                    <h3 class="text-sm font-medium text-accent-600 mb-3">Today's Progress</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-accent-600">Focus Time</span>
+                            <span class="text-xs font-medium text-accent-600">2h 15m</span>
+                        </div>
+                        <div class="progress-bar h-2">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-accent-600">Daily Goal</span>
+                            <span class="text-xs font-medium text-accent-600">75%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            <!-- Welcome Section -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-text-primary mb-2">Welcome back, <span id="mainUserName">Alex</span>! 👋</h1>
+                        <p class="text-text-secondary">Here's your academic progress overview for today</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-text-secondary">Today</p>
+                        <p class="text-lg font-semibold text-text-primary" id="currentDate">September 14, 2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Total Points -->
+                <div class="card p-6 hover:shadow-elevated transition-all duration-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-text-secondary mb-1">Total Points</p>
+                            <p class="text-2xl font-bold text-text-primary">2,847</p>
+                            <p class="text-xs text-accent-600 flex items-center mt-1">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                +127 today
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-trophy text-primary text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coding Points -->
+                <div class="card p-6 hover:shadow-elevated transition-all duration-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-text-secondary mb-1">Coding Points</p>
+                            <p class="text-2xl font-bold text-text-primary">1,523</p>
+                            <p class="text-xs text-accent-600 flex items-center mt-1">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                +45 today
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-code text-accent text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Focus Points -->
+                <div class="card p-6 hover:shadow-elevated transition-all duration-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-text-secondary mb-1">Focus Points</p>
+                            <p class="text-2xl font-bold text-text-primary">1,324</p>
+                            <p class="text-xs text-accent-600 flex items-center mt-1">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                +82 today
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-brain text-warning text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Study Streak -->
+                <div class="card p-6 hover:shadow-elevated transition-all duration-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-text-secondary mb-1">Study Streak</p>
+                            <p class="text-2xl font-bold text-text-primary">12 days</p>
+                            <p class="text-xs text-accent-600 flex items-center mt-1">
+                                <i class="fas fa-fire mr-1"></i>
+                                Keep it up!
+                            </p>
+                        </div>
+                        <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-fire text-error text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Tracker Widget -->
+            <div class="card p-6 mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-semibold text-text-primary">Achievement Progress</h2>
+                    <div class="flex items-center space-x-2 text-sm text-text-secondary">
+                        <i class="fas fa-target"></i>
+                        <span>Next milestone: 3,000 points</span>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <!-- Overall Progress -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium text-text-primary">Overall Progress</span>
+                            <span class="text-sm text-text-secondary">2,847 / 3,000 points</span>
+                        </div>
+                        <div class="progress-bar h-3">
+                            <div class="progress-fill" style="width: 94.9%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Milestone Indicators -->
+                    <div class="flex justify-between items-center pt-2">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-accent rounded-full"></div>
+                            <span class="text-xs text-text-secondary">Beginner (0)</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-accent rounded-full"></div>
+                            <span class="text-xs text-text-secondary">Intermediate (1,000)</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-accent rounded-full"></div>
+                            <span class="text-xs text-text-secondary">Advanced (2,500)</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-secondary-300 rounded-full"></div>
+                            <span class="text-xs text-text-secondary">Expert (3,000)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Access Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- My Notes -->
+                <a href="my_notes.html" class="card p-6 hover:shadow-elevated transition-all duration-200 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center group-hover:bg-primary-200 transition-colors">
+                            <i class="fas fa-sticky-note text-primary text-xl"></i>
+                        </div>
+                        <i class="fas fa-arrow-right text-secondary-400 group-hover:text-primary transition-colors"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-text-primary mb-2">My Notes</h3>
+                    <p class="text-sm text-text-secondary mb-3">Manage your study materials and notes</p>
+                    <div class="text-xs text-accent-600">
+                        <i class="fas fa-file-alt mr-1"></i>
+                        15 notes • 3 uploaded today
+                    </div>
+                </a>
+
+                <!-- Coding & Projects -->
+                <a href="coding_and_projects.html" class="card p-6 hover:shadow-elevated transition-all duration-200 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-accent-100 rounded-lg flex items-center justify-center group-hover:bg-accent-200 transition-colors">
+                            <i class="fas fa-code text-accent text-xl"></i>
+                        </div>
+                        <i class="fas fa-arrow-right text-secondary-400 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-text-primary mb-2">Coding & Projects</h3>
+                    <p class="text-sm text-text-secondary mb-3">Track your coding progress and projects</p>
+                    <div class="text-xs text-accent-600">
+                        <i class="fas fa-check-circle mr-1"></i>
+                        5 problems solved today
+                    </div>
+                </a>
+
+                <!-- My Schedule -->
+                <a href="my_schedule.html" class="card p-6 hover:shadow-elevated transition-all duration-200 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center group-hover:bg-warning-200 transition-colors">
+                            <i class="fas fa-calendar-alt text-warning text-xl"></i>
+                        </div>
+                        <i class="fas fa-arrow-right text-secondary-400 group-hover:text-warning transition-colors"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-text-primary mb-2">My Schedule</h3>
+                    <p class="text-sm text-text-secondary mb-3">Organize your academic calendar</p>
+                    <div class="text-xs text-accent-600">
+                        <i class="fas fa-clock mr-1"></i>
+                        3 events today
+                    </div>
+                </a>
+
+                <!-- Focus Mode -->
+                <a href="focus_mode.html" class="card p-6 hover:shadow-elevated transition-all duration-200 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center group-hover:bg-error-200 transition-colors">
+                            <i class="fas fa-brain text-error text-xl"></i>
+                        </div>
+                        <i class="fas fa-arrow-right text-secondary-400 group-hover:text-error transition-colors"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-text-primary mb-2">Focus Mode</h3>
+                    <p class="text-sm text-text-secondary mb-3">Enhance productivity with focused sessions</p>
+                    <div class="text-xs text-accent-600">
+                        <i class="fas fa-stopwatch mr-1"></i>
+                        2h 15m focused today
+                    </div>
+                </a>
+            </div>
+
+            <!-- Recent Activity & Upcoming Schedule -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Recent Activity Feed -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-text-primary">Recent Activity</h2>
+                        <button class="text-sm text-primary hover:text-primary-700 transition-colors">View All</button>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Activity Item -->
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-code text-accent text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-text-primary">Solved 3 LeetCode problems</p>
+                                <p class="text-xs text-text-secondary">2 hours ago</p>
+                            </div>
+                            <span class="text-xs text-accent-600 font-medium">+45 pts</span>
+                        </div>
+
+                        <!-- Activity Item -->
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-warning-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-brain text-warning text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-text-primary">Completed 90-minute focus session</p>
+                                <p class="text-xs text-text-secondary">4 hours ago</p>
+                            </div>
+                            <span class="text-xs text-accent-600 font-medium">+45 pts</span>
+                        </div>
+
+                        <!-- Activity Item -->
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-file-upload text-primary text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-text-primary">Uploaded Data Structures notes</p>
+                                <p class="text-xs text-text-secondary">Yesterday</p>
+                            </div>
+                        </div>
+
+                        <!-- Activity Item -->
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-trophy text-accent text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-text-primary">Reached Advanced milestone</p>
+                                <p class="text-xs text-text-secondary">2 days ago</p>
+                            </div>
+                            <span class="text-xs text-accent-600 font-medium">+100 pts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Schedule Panel -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-text-primary">Upcoming Schedule</h2>
+                        <button class="text-sm text-primary hover:text-primary-700 transition-colors">View Calendar</button>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Schedule Item -->
+                        <div class="flex items-start space-x-3 p-3 bg-primary-50 rounded-lg">
+                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-book text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-text-primary">Algorithm Design Class</p>
+                                <p class="text-xs text-text-secondary">Today • 2:00 PM - 3:30 PM</p>
+                                <p class="text-xs text-primary">Room 301, CS Building</p>
+                            </div>
+                        </div>
+
+                        <!-- Schedule Item -->
+                        <div class="flex items-start space-x-3 p-3 bg-accent-50 rounded-lg">
+                            <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-users text-white text-sm"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-text-primary">Study Group - OS Concepts</p>
+                                <p class="text-xs text-text-secondary">Today • 4:00 PM - 6:00 PM</p>
+                                <p class="text-xs text-accent">Library Study Room B</p>
+                            </div>
+                        </div>
+
+                        <!-- Todo Items -->
+                        <div class="pt-2 border-t border-secondary-200">
+                            <h3 class="text-sm font-medium text-text-primary mb-3">Pending Tasks</h3>
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2">
+                                    <input type="checkbox" class="w-4 h-4 text-primary border-secondary-300 rounded" />
+                                    <span class="text-sm text-text-secondary">Complete Database assignment</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="checkbox" class="w-4 h-4 text-primary border-secondary-300 rounded" />
+                                    <span class="text-sm text-text-secondary">Review ML lecture notes</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <input type="checkbox" class="w-4 h-4 text-primary border-secondary-300 rounded" />
+                                    <span class="text-sm text-text-secondary">Prepare for Networks quiz</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="chatbotToggle" class="floating-action shadow-floating">
+            <i class="fas fa-robot text-xl"></i>
+        </button>
+        
+        <!-- Chatbot Window -->
+        <div id="chatbotWindow" class="hidden absolute bottom-16 right-0 w-80 h-96 bg-surface rounded-lg shadow-floating border border-secondary-200">
+            <div class="flex items-center justify-between p-4 border-b border-secondary-200">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-text-primary">StudyMate AI</p>
+                        <p class="text-xs text-accent-600">Online</p>
+                    </div>
+                </div>
+                <button id="closeChatbot" class="text-secondary-400 hover:text-secondary-600 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="flex-1 p-4 h-64 overflow-y-auto">
+                <div class="space-y-3">
+                    <div class="flex items-start space-x-2">
+                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-robot text-white text-xs"></i>
+                        </div>
+                        <div class="bg-secondary-100 rounded-lg p-3 max-w-xs">
+                            <p class="text-sm text-text-primary">Hi Alex! How can I help you with your studies today?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-secondary-200">
+                <div class="flex space-x-2">
+                    <input type="text" placeholder="Ask me anything..." class="flex-1 input-field text-sm" />
+                    <button class="btn-primary px-3 py-2">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize user data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get user data from localStorage or use defaults
+            const userEmail = localStorage.getItem('userEmail') || 'student@btech.edu';
+            const userName = getUserNameFromEmail(userEmail);
+            const userInitials = getInitials(userName);
+            
+            // Update UI elements
+            document.getElementById('userGreeting').textContent = userName;
+            document.getElementById('mainUserName').textContent = userName.split(' ')[0];
+            document.getElementById('userInitials').textContent = userInitials;
+            document.getElementById('dropdownName').textContent = userName;
+            document.getElementById('dropdownEmail').textContent = userEmail;
+            
+            // Set current date
+            const currentDate = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('currentDate').textContent = currentDate;
+        });
+
+        // Helper functions
+        function getUserNameFromEmail(email) {
+            if (email === 'admin@studymate.com') return 'Admin User';
+            if (email === 'student@btech.edu') return 'Alex Johnson';
+            return 'Student User';
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase();
+        }
+
+        // Profile dropdown functionality
+        document.getElementById('profileDropdown').addEventListener('click', function() {
+            const dropdown = document.getElementById('dropdownMenu');
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdownMenu');
+            const button = document.getElementById('profileDropdown');
+            
+            if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // Chatbot functionality
+        document.getElementById('chatbotToggle').addEventListener('click', function() {
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            chatbotWindow.classList.toggle('hidden');
+        });
+
+        document.getElementById('closeChatbot').addEventListener('click', function() {
+            document.getElementById('chatbotWindow').classList.add('hidden');
+        });
+
+        // Animate progress bars on load
+        window.addEventListener('load', function() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+
+        // Check authentication
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coding & Projects - StudyMate AI</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fstudymate8339back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Top Navigation -->
+    <nav class="bg-surface shadow-sm border-b border-secondary-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-3">
+                    <div class="flex items-center justify-center w-8 h-8 bg-primary rounded-lg">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-semibold text-text-primary">StudyMate AI</span>
+                </div>
+
+                <!-- User Greeting and Profile -->
+                <div class="flex items-center space-x-4">
+                    <span class="text-text-secondary hidden sm:block">Good afternoon, Alex!</span>
+                    <div class="relative">
+                        <button id="profileDropdown" class="flex items-center space-x-2 text-text-secondary hover:text-text-primary transition-colors">
+                            <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                                <span class="text-white text-sm font-medium">A</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        
+                        <!-- Dropdown Menu -->
+                        <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-surface rounded-lg shadow-floating border border-secondary-200 py-2">
+                            <div class="px-4 py-2 border-b border-secondary-200">
+                                <p class="text-sm font-medium text-text-primary">Alex Johnson</p>
+                                <p class="text-xs text-text-secondary">student@btech.edu</p>
+                            </div>
+                            <a href="javascript:void(0)" class="block px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50 hover:text-text-primary transition-colors">
+                                <i class="fas fa-user mr-2"></i>Profile Settings
+                            </a>
+                            <a href="login.html" class="block px-4 py-2 text-sm text-text-secondary hover:bg-secondary-50 hover:text-text-primary transition-colors">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex min-h-screen">
+        <!-- Left Sidebar -->
+        <aside class="w-64 bg-surface shadow-sm border-r border-secondary-200">
+            <div class="p-6">
+                <nav class="space-y-2">
+                    <a href="dashboard.html" class="flex items-center space-x-3 px-3 py-2 text-text-secondary hover:text-text-primary hover:bg-secondary-50 rounded-md transition-colors">
+                        <i class="fas fa-home w-5"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="my_notes.html" class="flex items-center space-x-3 px-3 py-2 text-text-secondary hover:text-text-primary hover:bg-secondary-50 rounded-md transition-colors">
+                        <i class="fas fa-sticky-note w-5"></i>
+                        <span>My Notes</span>
+                    </a>
+                    <a href="coding_and_projects.html" class="flex items-center space-x-3 px-3 py-2 text-text-primary bg-primary-50 border-r-2 border-primary rounded-md">
+                        <i class="fas fa-code w-5 text-primary"></i>
+                        <span class="font-medium">Coding & Projects</span>
+                    </a>
+                    <a href="my_schedule.html" class="flex items-center space-x-3 px-3 py-2 text-text-secondary hover:text-text-primary hover:bg-secondary-50 rounded-md transition-colors">
+                        <i class="fas fa-calendar w-5"></i>
+                        <span>My Schedule</span>
+                    </a>
+                    <a href="focus_mode.html" class="flex items-center space-x-3 px-3 py-2 text-text-secondary hover:text-text-primary hover:bg-secondary-50 rounded-md transition-colors">
+                        <i class="fas fa-brain w-5"></i>
+                        <span>Focus Mode</span>
+                    </a>
+                </nav>
+
+                <!-- Progress Widget -->
+                <div class="mt-8 p-4 bg-accent-50 rounded-lg border border-accent-100">
+                    <h3 class="text-sm font-medium text-accent-600 mb-2">Total Progress</h3>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-2xl font-bold text-accent-600">2,847</span>
+                        <span class="text-xs text-accent-500">points</span>
+                    </div>
+                    <div class="progress-bar h-2">
+                        <div class="progress-fill" style="width: 68%"></div>
+                    </div>
+                    <p class="text-xs text-accent-500 mt-1">Level 12 • 68% to next level</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            <!-- Page Header -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-text-primary mb-2">Coding & Projects</h1>
+                        <p class="text-text-secondary">Track your programming progress across multiple platforms</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button class="btn-secondary" id="syncAllBtn">
+                            <i class="fas fa-sync-alt mr-2"></i>
+                            Sync All
+                        </button>
+                        <button class="btn-primary" id="addCodingProfileBtn">
+                            <i class="fas fa-plus mr-2"></i>
+                            Add Coding Profile
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platform Overview Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <!-- LeetCode Card -->
+                <div class="card p-6 cursor-pointer hover:shadow-md transition-shadow" data-platform="leetcode">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-code text-orange-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-text-primary">LeetCode</h3>
+                                <p class="text-sm text-text-secondary">Connected</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-1 text-success-600">
+                            <i class="fas fa-check-circle text-sm"></i>
+                            <span class="text-xs">Synced</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Problems Solved</span>
+                            <span class="font-semibold text-text-primary">247</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Current Streak</span>
+                            <span class="font-semibold text-accent">15 days</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Points Earned</span>
+                            <span class="font-semibold text-primary">1,235</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-secondary-200">
+                        <div class="flex items-center justify-between text-xs text-text-secondary">
+                            <span>Last sync: 2 hours ago</span>
+                            <button class="text-primary hover:text-primary-700">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CodeChef Card -->
+                <div class="card p-6 cursor-pointer hover:shadow-md transition-shadow" data-platform="codechef">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-trophy text-amber-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-text-primary">CodeChef</h3>
+                                <p class="text-sm text-text-secondary">Connected</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-1 text-success-600">
+                            <i class="fas fa-check-circle text-sm"></i>
+                            <span class="text-xs">Synced</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Rating</span>
+                            <span class="font-semibold text-text-primary">1847</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Global Rank</span>
+                            <span class="font-semibold text-accent">#12,456</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-text-secondary">Points Earned</span>
+                            <span class="font-semibold text-primary">892</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-secondary-200">
+                        <div class="flex items-center justify-between text-xs text-text-secondary">
+                            <span>Last sync: 1 hour ago</span>
+                            <button class="text-primary hover:text-primary-700">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Platform Card -->
+                <div class="card p-6 border-2 border-dashed border-secondary-300 hover:border-primary transition-colors cursor-pointer" id="addPlatformCard">
+                    <div class="flex flex-col items-center justify-center h-full text-center">
+                        <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mb-3">
+                            <i class="fas fa-plus text-secondary-400 text-xl"></i>
+                        </div>
+                        <h3 class="font-medium text-text-primary mb-1">Add Coding Profile</h3>
+                        <p class="text-sm text-text-secondary">Connect HackerRank, Codeforces, GitHub or other platforms</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Analytics -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Points Progress Chart -->
+                <div class="card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-text-primary">Points Progress</h3>
+                        <select class="text-sm border border-secondary-200 rounded-md px-3 py-1 bg-surface">
+                            <option>Last 30 days</option>
+                            <option>Last 7 days</option>
+                            <option>Last 90 days</option>
+                        </select>
+                    </div>
+                    <div class="h-64 flex items-end justify-between space-x-2">
+                        <!-- Mock Chart Bars -->
+                        <div class="flex flex-col items-center space-y-2">
+                            <div class="w-8 bg-primary-200 rounded-t" style="height: 40px;"></div>
+                            <span class="text-xs text-text-secondary">Mon</span>
+                        </div>
+                        <div class="flex flex-col items-center space-y-2">
+                            <div class="w-8 bg-primary-300 rounded-t" style="height: 65px;"></div>
+                            <span class="text-xs text-text-secondary">Tue</span>
+                        </div>
+                        <div class="flex flex-col items-center space-y-2">
+                            <div class="w-8 bg-primary-400 rounded-t" style="height: 85px;"></div>
+                            <span class="text-xs text-text-secondary">Wed</span>
+                        </div>
+                        <div class="flex flex-col items-center space-y-2">
+                            <div class="w-8 bg-primary-500 rounded-t" style="height: 120px;"></div>
+                            <span class="text-xs text-text-secondary">Thu</span>
+                        </div>
+                        <div class="flex flex-col items-center space-y-2">
+                            <div class="w-8 bg-primary-600 rounded-t" style="height: 95px;"></div>
+                            <span class="text-xs text-text-secondary">Fri</span>
+                        </div>
+                        <div class="flex flex-col items-center space-y-2">
+                            <div class="w-8 bg-primary-400 rounded-t" style="height: 75px;"></div>
+                            <span class="text-xs text-text-secondary">Sat</span>
+                        </div>
+                        <div class="flex flex-col items-center space-y-2">
+                            <div class="w-8 bg-primary-300 rounded-t" style="height: 55px;"></div>
+                            <span class="text-xs text-text-secondary">Sun</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between text-sm">
+                        <span class="text-text-secondary">Total this week: <strong class="text-text-primary">485 points</strong></span>
+                        <span class="text-accent">↗ +12% from last week</span>
+                    </div>
+                </div>
+
+                <!-- Problem Difficulty Breakdown -->
+                <div class="card p-6">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Problem Difficulty</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-success rounded-full"></div>
+                                <span class="text-text-secondary">Easy</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-32 bg-secondary-200 rounded-full h-2">
+                                    <div class="bg-success h-2 rounded-full" style="width: 85%;"></div>
+                                </div>
+                                <span class="text-sm font-medium text-text-primary w-12 text-right">127</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-warning rounded-full"></div>
+                                <span class="text-text-secondary">Medium</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-32 bg-secondary-200 rounded-full h-2">
+                                    <div class="bg-warning h-2 rounded-full" style="width: 60%;"></div>
+                                </div>
+                                <span class="text-sm font-medium text-text-primary w-12 text-right">89</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 bg-error rounded-full"></div>
+                                <span class="text-text-secondary">Hard</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-32 bg-secondary-200 rounded-full h-2">
+                                    <div class="bg-error h-2 rounded-full" style="width: 25%;"></div>
+                                </div>
+                                <span class="text-sm font-medium text-text-primary w-12 text-right">31</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 p-4 bg-accent-50 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-accent-600">Success Rate</span>
+                            <span class="text-lg font-bold text-accent-600">78.4%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Showcase -->
+            <div class="card p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-text-primary">Project Showcase</h3>
+                    <button class="btn-primary">
+                        <i class="fas fa-plus mr-2"></i>
+                        Add Project
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Project 1 -->
+                    <div class="border border-secondary-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="E-commerce Platform" class="w-10 h-10 rounded-lg object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <div>
+                                    <h4 class="font-medium text-text-primary">E-commerce Platform</h4>
+                                    <p class="text-xs text-text-secondary">Full-stack web application</p>
+                                </div>
+                            </div>
+                            <a href="https://github.com/alexjohnson/ecommerce-platform" target="_blank" class="text-text-secondary hover:text-primary">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                        <p class="text-sm text-text-secondary mb-3">Modern e-commerce solution built with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.</p>
+                        <div class="flex flex-wrap gap-1 mb-3">
+                            <span class="px-2 py-1 bg-primary-100 text-primary text-xs rounded">React</span>
+                            <span class="px-2 py-1 bg-accent-100 text-accent text-xs rounded">Node.js</span>
+                            <span class="px-2 py-1 bg-warning-100 text-warning text-xs rounded">MongoDB</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs text-text-secondary">
+                            <span>Updated 3 days ago</span>
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-warning"></i>
+                                <span>24</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="border border-secondary-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="AI Chatbot" class="w-10 h-10 rounded-lg object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <div>
+                                    <h4 class="font-medium text-text-primary">AI Study Assistant</h4>
+                                    <p class="text-xs text-text-secondary">Machine learning project</p>
+                                </div>
+                            </div>
+                            <a href="https://github.com/alexjohnson/ai-study-assistant" target="_blank" class="text-text-secondary hover:text-primary">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                        <p class="text-sm text-text-secondary mb-3">Intelligent chatbot that helps students with academic queries using natural language processing and machine learning algorithms.</p>
+                        <div class="flex flex-wrap gap-1 mb-3">
+                            <span class="px-2 py-1 bg-primary-100 text-primary text-xs rounded">Python</span>
+                            <span class="px-2 py-1 bg-accent-100 text-accent text-xs rounded">TensorFlow</span>
+                            <span class="px-2 py-1 bg-warning-100 text-warning text-xs rounded">Flask</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs text-text-secondary">
+                            <span>Updated 1 week ago</span>
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-warning"></i>
+                                <span>18</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Project Card -->
+                    <div class="border-2 border-dashed border-secondary-300 rounded-lg p-4 hover:border-primary transition-colors cursor-pointer">
+                        <div class="flex flex-col items-center justify-center h-full text-center py-8">
+                            <div class="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mb-3">
+                                <i class="fas fa-plus text-secondary-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-medium text-text-primary mb-1">Add New Project</h4>
+                            <p class="text-sm text-text-secondary">Showcase your latest work</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="card p-6">
+                <h3 class="text-lg font-semibold text-text-primary mb-4">Recent Activity</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4 p-3 bg-success-50 rounded-lg">
+                        <div class="w-8 h-8 bg-success rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-text-primary">Solved "Two Sum" problem on LeetCode</p>
+                            <p class="text-xs text-text-secondary">Earned 25 points • 2 hours ago</p>
+                        </div>
+                        <span class="text-sm font-medium text-success">+25 pts</span>
+                    </div>
+
+                    <div class="flex items-center space-x-4 p-3 bg-primary-50 rounded-lg">
+                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                            <i class="fas fa-trophy text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-text-primary">Achieved 15-day streak on LeetCode</p>
+                            <p class="text-xs text-text-secondary">Bonus points awarded • 5 hours ago</p>
+                        </div>
+                        <span class="text-sm font-medium text-primary">+50 pts</span>
+                    </div>
+
+                    <div class="flex items-center space-x-4 p-3 bg-accent-50 rounded-lg">
+                        <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                            <i class="fas fa-code text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-text-primary">Updated "AI Study Assistant" project</p>
+                            <p class="text-xs text-text-secondary">Added new features • 1 day ago</p>
+                        </div>
+                        <span class="text-sm font-medium text-accent">Project</span>
+                    </div>
+
+                    <div class="flex items-center space-x-4 p-3 bg-warning-50 rounded-lg">
+                        <div class="w-8 h-8 bg-warning rounded-full flex items-center justify-center">
+                            <i class="fas fa-medal text-white text-sm"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-text-primary">Participated in CodeChef contest</p>
+                            <p class="text-xs text-text-secondary">Ranked #1,247 globally • 2 days ago</p>
+                        </div>
+                        <span class="text-sm font-medium text-warning">+75 pts</span>
+                    </div>
+                </div>
+
+                <div class="mt-4 text-center">
+                    <button class="text-primary hover:text-primary-700 text-sm font-medium">
+                        View All Activity
+                        <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Coding Profile Modal -->
+    <div id="addProfileModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-text-primary">Add Coding Profile</h3>
+                <button id="closeModal" class="text-text-secondary hover:text-text-primary">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="addProfileForm">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-text-primary mb-2">Platform</label>
+                    <select id="platformSelect" class="input-field w-full" required>
+                        <option value>Choose Platform</option>
+                        <option value="github">GitHub</option>
+                        <option value="hackerrank">HackerRank</option>
+                        <option value="codeforces">Codeforces</option>
+                        <option value="atcoder">AtCoder</option>
+                        <option value="topcoder">TopCoder</option>
+                        <option value="spoj">SPOJ</option>
+                    </select>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-text-primary mb-2">Username/Profile URL</label>
+                    <input type="text" id="profileUsername" class="input-field w-full" placeholder="Enter your username or profile URL" required />
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancelAddProfile" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div class="floating-action">
+        <i class="fas fa-robot text-xl"></i>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="successToast" class="hidden fixed top-4 right-4 bg-success-50 border border-success-200 text-success-600 px-4 py-3 rounded-lg shadow-lg z-50">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="successMessage">Success!</span>
+        </div>
+    </div>
+
+    <div id="errorToast" class="hidden fixed top-4 right-4 bg-error-50 border border-error-200 text-error-600 px-4 py-3 rounded-lg shadow-lg z-50">
+        <div class="flex items-center">
+            <i class="fas fa-exclamation-circle mr-2"></i>
+            <span id="errorMessage">Error occurred!</span>
+        </div>
+    </div>
+
+    <script>
+    // Profile dropdown functionality
+    document.getElementById('profileDropdown').addEventListener('click', function() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const button = document.getElementById('profileDropdown');
+        
+        if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+
+    // Platform redirects
+    const platformUrls = {
+        leetcode: 'https://leetcode.com/u/alexjohnson247/',
+        codechef: 'https://www.codechef.com/users/alex_code',
+        github: 'https://github.com/alexjohnson',
+        hackerrank: 'https://www.hackerrank.com/profile/alexjohnson',
+        codeforces: 'https://codeforces.com/profile/alexjohnson',
+        atcoder: 'https://atcoder.jp/users/alexjohnson',
+        topcoder: 'https://www.topcoder.com/members/alexjohnson',
+        spoj: 'https://www.spoj.com/users/alexjohnson/'
+    };
+
+    // Platform card clicks
+    document.querySelectorAll('[data-platform]').forEach(card => {
+        card.addEventListener('click', function() {
+            const platform = this.dataset.platform;
+            if (platformUrls[platform]) {
+                showToast('successToast', `Redirecting to ${platform.charAt(0).toUpperCase() + platform.slice(1)} profile...`);
+                setTimeout(() => {
+                    window.open(platformUrls[platform], '_blank');
+                }, 1000);
+            }
+        });
+    });
+
+    // View Profile button clicks
+    document.querySelectorAll('[data-platform] button').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent card click
+            const platform = this.closest('[data-platform]').dataset.platform;
+            if (platformUrls[platform]) {
+                window.open(platformUrls[platform], '_blank');
+            }
+        });
+    });
+
+    // Modal functionality
+    const addProfileModal = document.getElementById('addProfileModal');
+    const addCodingProfileBtn = document.getElementById('addCodingProfileBtn');
+    const addPlatformCard = document.getElementById('addPlatformCard');
+    const closeModal = document.getElementById('closeModal');
+    const cancelAddProfile = document.getElementById('cancelAddProfile');
+    const addProfileForm = document.getElementById('addProfileForm');
+
+    function openModal() {
+        addProfileModal.classList.remove('hidden');
+    }
+
+    function closeModalFunc() {
+        addProfileModal.classList.add('hidden');
+        addProfileForm.reset();
+    }
+
+    addCodingProfileBtn.addEventListener('click', openModal);
+    addPlatformCard.addEventListener('click', openModal);
+    closeModal.addEventListener('click', closeModalFunc);
+    cancelAddProfile.addEventListener('click', closeModalFunc);
+
+    // Close modal when clicking outside
+    addProfileModal.addEventListener('click', function(e) {
+        if (e.target === addProfileModal) {
+            closeModalFunc();
+        }
+    });
+
+    // Form submission
+    addProfileForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const platform = document.getElementById('platformSelect').value;
+        const username = document.getElementById('profileUsername').value;
+        
+        if (platform && username) {
+            showToast('successToast', `${platform.charAt(0).toUpperCase() + platform.slice(1)} profile added successfully!`);
+            closeModalFunc();
+            
+            // Simulate redirect to the actual platform
+            setTimeout(() => {
+                let profileUrl;
+                switch(platform) {
+                    case 'github':
+                        profileUrl = `https://github.com/${username}`;
+                        break;
+                    case 'hackerrank':
+                        profileUrl = `https://www.hackerrank.com/profile/${username}`;
+                        break;
+                    case 'codeforces':
+                        profileUrl = `https://codeforces.com/profile/${username}`;
+                        break;
+                    case 'atcoder':
+                        profileUrl = `https://atcoder.jp/users/${username}`;
+                        break;
+                    case 'topcoder':
+                        profileUrl = `https://www.topcoder.com/members/${username}`;
+                        break;
+                    case 'spoj':
+                        profileUrl = `https://www.spoj.com/users/${username}/`;
+                        break;
+                    default:
+                        profileUrl = '#';
+                }
+                
+                if (profileUrl !== '#') {
+                    window.open(profileUrl, '_blank');
+                }
+            }, 1500);
+        }
+    });
+
+    // Mock data sync functionality
+    function syncPlatformData() {
+        const syncButton = document.getElementById('syncAllBtn');
+        const originalText = syncButton.innerHTML;
+        
+        syncButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Syncing...';
+        syncButton.disabled = true;
+        
+        setTimeout(() => {
+            syncButton.innerHTML = originalText;
+            syncButton.disabled = false;
+            showToast('successToast', 'Platform data synced successfully!');
+        }, 2000);
+    }
+
+    // Sync button functionality
+    document.getElementById('syncAllBtn').addEventListener('click', syncPlatformData);
+
+    // Show toast notification function
+    function showToast(toastId, message) {
+        const toast = document.getElementById(toastId);
+        const messageElement = toast.querySelector('span');
+        messageElement.textContent = message;
+        toast.classList.remove('hidden');
+        
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 3000);
+    }
+
+    // GitHub links functionality
+    document.querySelectorAll('a[href^="https://github.com"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            showToast('successToast', 'Redirecting to GitHub repository...');
+            setTimeout(() => {
+                window.open(this.href, '_blank');
+            }, 1000);
+        });
+    });
+
+    // Add project button
+    const addProjectButton = Array.from(document.querySelectorAll('button')).find(btn => 
+        btn.textContent.includes('Add Project')
+    );
+    if (addProjectButton) {
+        addProjectButton.addEventListener('click', function() {
+            showToast('successToast', 'Project upload feature coming soon!');
+        });
+    }
+
+    // AI Chatbot functionality
+    document.querySelector('.floating-action').addEventListener('click', () => {
+        showToast('successToast', 'AI Assistant is ready to help!');
+    });
+</script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
